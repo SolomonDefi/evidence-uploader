@@ -22,7 +22,6 @@ __pycache__
 *.env
 
 # IDE
-.vscode/
 .idea/
 
 # Local Netlify folder

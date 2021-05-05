@@ -1,6 +1,6 @@
 # Solomon Evidence Uploader
 
-This repository contains the [frontend](./frontend/README.md) and [backend](./backend/README.md) for the Solomon evidence uploading system.
+This repository contains the [frontend](./frontend/) and [backend](./backend/) for the Solomon evidence uploading system.
 See the READMEs in those folders for installation instructions and more technical details.
 
 The purpose of the uploader is to provide a simple interface for uploading evidence links to the blockchain during escrow disputes. Links must exist for the

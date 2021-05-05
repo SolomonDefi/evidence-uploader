@@ -1,0 +1,17 @@
+{
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true
+    },
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/*.postcss.json": true
+    },
+    "editor.tabSize": 2,
+    "eslint.validate": [
+        "vue",
+        "javascript",
+        "html"
+    ]
+}
