@@ -1,6 +1,6 @@
 # Evidence Uploader Backend
 
-A Flask (Python) app for uploading dispute evidence links to the blockchain. Files may be provided via external link, or uploaded directly to the
+A FastAPI (Python) app for uploading dispute evidence files to the blockchain. Files may be provided via external link, or uploaded directly to the
 hosted [backend](../backend/README.md). Metamask is used for executing the transaction.
 
 A [URL Shortener](https://github.com/solomondefi/link-shortener) is used to shorten links to reduce blockchain gas fees.
@@ -32,8 +32,8 @@ pip3 install poetry
 
 ```
 brew install poetry pyenv
-pyenv install 3.9.4
-pyenv local 3.9.4
+pyenv install 3.9.5
+pyenv local 3.9.5
 ```
 
 ### Install python packages

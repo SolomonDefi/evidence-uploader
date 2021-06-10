@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "solomon-evidence-uploader-backend"
+version = "0.1.0"
+description = "A FastAPI (Python) app for uploading Solomon dispute evidence files to the blockchain"
+authors = ["Solomon Defi <solomondefi@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pylint = "*"
+pytest = "*"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta:__legacy__"
