@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '/src/views/Home.vue';
 import SelectMethod from '/src/views/SelectMethod.vue';
 import ExternalLink from '/src/views/ExternalLink.vue';
+import SolomonLink from '/src/views/SolomonLink.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -22,7 +23,13 @@ const router = createRouter({
       path: '/upload-external/:type(buyer|merchant)',
       name: 'upload-external',
       component: ExternalLink,
-      meta: { title: 'Evidence Method' },
+      meta: { title: 'External Link' },
+    },
+    {
+      path: '/upload-solomon/:type(buyer|merchant)',
+      name: 'upload-solomon',
+      component: SolomonLink,
+      meta: { title: 'Solomon Link' },
     },
   ],
 });

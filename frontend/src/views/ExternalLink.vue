@@ -1,18 +1,18 @@
 <template>
 <div class="page-wrap external-link">
   <div class="page container">
-    <h1>{{ $t('external.title') }}</h1>
+    <h1>{{ $t('upload.title') }}</h1>
     <div class="section">
-      {{ $t('external.text1') }}
+      {{ $t('upload.text1') }}
     </div>
     <div class="section">
-      {{ $t('external.text2') }}
+      {{ $t('upload.text2') }}
     </div>
     <SlmInput
       v-model="link"
-      :title="$t('external.placeholder')"
+      :title="$t('upload.placeholder')"
     />
-    <Checkbox :label="$t('external.shorten')" :checked="shorten" @checked="shorten = $event" />
+    <Checkbox :label="$t('upload.shorten')" :checked="shorten" @checked="shorten = $event" />
     <ErrorMessage :errorMessage="error" />
     <div class="buttons">
       <div
@@ -49,9 +49,9 @@ export default {
     const shorten = ref(false);
     const upload = () => {
       if(!validateUrl(link.value)) {
-        error.value = t('external.invalid_url');
+        error.value = t('upload.invalid_url');
       } else {
-        error.value = t('external.unavailable');
+        error.value = t('upload.unavailable');
       }
     };
     return {

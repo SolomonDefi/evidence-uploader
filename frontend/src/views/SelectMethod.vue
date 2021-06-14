@@ -28,7 +28,6 @@
         </div>
       </div>
     </div>
-    <ErrorMessage :errorMessage="error" />
     <div class="buttons">
       <div
         class="button button-back"
@@ -56,21 +55,14 @@ export default {
     const router = useRouter();
     const route = useRoute();
     const method = ref('upload-external');
-    const error = ref(null);
 
     const goMethod = () => {
-      if(method.value === 'upload-solomon') {
-        error.value = t('select.unavailable');
-      } else {
-        router.push({ name: method.value, params: { type: route.params.type } });
-      }
+      router.push({ name: method.value, params: { type: route.params.type } });
     };
     const select = (newMethod) => {
-      error.value = null;
       method.value = newMethod;
     };
     return {
-      error,
       method,
       select,
       goMethod,

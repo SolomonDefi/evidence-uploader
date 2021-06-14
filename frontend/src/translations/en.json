@@ -24,13 +24,23 @@
     "solomon_text": "Upload evidence to our servers. We'll make sure it's available for the duration of the dispute.",
     "unavailable": "Sorry, this upload method is currently unavailable."
   },
-  "external": {
+  "upload": {
     "title": "External Link Evidence Upload",
     "text1": "Use an existing link as evidence",
     "text2": "The evidence link must be publicly visible. It should point to a standard document (e.g. image, PDF, zip file), and must remain available for the duration of the dispute.",
     "placeholder": "Link",
     "invalid_url": "Please enter a valid URL that starts with http:// or https://",
     "unavailable": "Evidence upload is not available yet.",
-    "shorten": "Use link shortener to save gas"
+    "shorten": "Use link shortener to save gas",
+    "solomon": "Solomon Evidence Upload",
+    "solomon_text1": "Upload an evidence file to Solomon's temporary storage. The file will last 30 days.",
+    "solomon_text2": "Accepted file types: jpg, png, txt, pdf, gif, mp4, zip. Maximum file size: 20MB",
+    "drag_drop": "Drag and Drop to Upload",
+    "browse_file": "Or browse to choose a file"
+  },
+  "errors": {
+    "FILE_SIZE_BIG": "File too large",
+    "FILE_TYPE": "File type not supported",
+    "FILE_REQUIRED": "Please choose a file to upload"
   }
 }
