@@ -12,6 +12,7 @@
       v-model="link"
       :title="$t('external.placeholder')"
     />
+    <Checkbox :label="$t('external.shorten')" :checked="shorten" @checked="shorten = $event" />
     <ErrorMessage :errorMessage="error" />
     <div class="buttons">
       <div
@@ -45,6 +46,7 @@ export default {
     const { t } = useI18n();
     const link = ref('');
     const error = ref(null);
+    const shorten = ref(false);
     const upload = () => {
       if(!validateUrl(link.value)) {
         error.value = t('external.invalid_url');
@@ -56,6 +58,7 @@ export default {
       link,
       error,
       upload,
+      shorten,
     };
   },
 };

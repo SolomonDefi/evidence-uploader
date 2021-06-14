@@ -8,8 +8,8 @@
   },
   "home": {
     "title": "Solomon Dispute Evidence Uploader",
-    "intro": "This site provides simple methods for uploading evidence for a purchase/escrow dispute. This is only intended for transactions made through the Solomon payment network.",
-    "wallet": "A Metamask account is required to submit the link to the blockchain.",
+    "intro": "This site provides methods for uploading evidence in a purchase/escrow dispute. Intended only for transactions made through the Solomon payment network.",
+    "wallet": "A <a href=\"https://metamask.io/\" target=\"_blank\">Metamask</a> account is required to submit links.",
     "type": "Please select whether you are the buyer or the merchant. Not required for escrow transactions.",
     "buyer": "Buyer",
     "merchant": "Merchant",
@@ -30,6 +30,7 @@
     "text2": "The evidence link must be publicly visible. It should point to a standard document (e.g. image, PDF, zip file), and must remain available for the duration of the dispute.",
     "placeholder": "Link",
     "invalid_url": "Please enter a valid URL that starts with http:// or https://",
-    "unavailable": "Evidence upload is not available yet."
+    "unavailable": "Evidence upload is not available yet.",
+    "shorten": "Use link shortener to save gas"
   }
 }

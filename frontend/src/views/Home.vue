@@ -5,9 +5,7 @@
     <div class="section">
       {{ $t('home.intro') }}
     </div>
-    <div class="section">
-      {{ $t('home.wallet') }}
-    </div>
+    <div class="section" v-html="$t('home.wallet')" />
     <div class="section">
       {{ $t('home.type') }}
     </div>
