@@ -6,10 +6,19 @@ authors = ["Solomon Defi <solomondefi@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+fastapi = "^0.65.2"
+passlib = {extras = ["bcrypt"], version = "^1.7.2"}
+uvicorn = "^0.14.0"
+pydantic = "^1.8.2"
+python-jose = {extras = ["cryptography"], version = "^3.1.0"}
+psycopg2 = "^2.8.6"
+SQLAlchemy = "^1.4.18"
+starlette = "^0.14.2"
 
 [tool.poetry.dev-dependencies]
 pylint = "*"
 pytest = "*"
+black = "^21.6b0"
 
 [build-system]
 requires = ["setuptools", "wheel"]

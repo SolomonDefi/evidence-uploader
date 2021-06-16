@@ -9,6 +9,9 @@
         "**/*.postcss.json": true
     },
     "editor.tabSize": 2,
+    "[python]": {
+        "editor.tabSize": 4
+    },
     "eslint.validate": [
         "vue",
         "javascript",
