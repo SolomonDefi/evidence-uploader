@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship, Session
 
 from app.db.base_class import Base
 from app.db.crud import CRUDBase
-from app.schemas.item import ItemCreate, ItemUpdate
+from app.schemas.upload_item import UploadItemCreate, UploadItemUpdate
 
 class UploadItem(Base):
     id = Column(Integer, primary_key=True, index=True)
@@ -14,9 +14,9 @@ class UploadItem(Base):
     owner = relationship('User', back_populates='items')
 
 
-class CRUDItem(CRUDBase[UploadItem, ItemCreate, ItemUpdate]):
+class CRUDItem(CRUDBase[UploadItem, UploadItemCreate, UploadItemUpdate]):
     def create_with_owner(
-        self, db: Session, *, obj_in: ItemCreate, owner_id: int
+        self, db: Session, *, obj_in: UploadItemCreate, owner_id: int
     ) -> UploadItem:
         obj_in_data = jsonable_encoder(obj_in)
         db_obj = self.model(**obj_in_data, owner_id=owner_id)

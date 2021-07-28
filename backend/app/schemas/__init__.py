@@ -1,3 +1,3 @@
-from .upload_item import Item, ItemCreate, ItemInDB, ItemUpdate
+from .upload_item import UploadItem, UploadItemCreate, UploadItemInDB, UploadItemUpdate
 from .token import Token, TokenPayload
 from .user import User, UserCreate, UserInDB, UserUpdate

@@ -42,6 +42,24 @@ pyenv local 3.9.5
 poetry install
 ```
 
+### Run the app
+
+First you'll need to create a database (make sure Postgres is installed). Make sure to set the appropriate variables in `.env` as well.
+```
+createdb -U <dbuser> solomon_evidence
+```
+
+Then, initialize:
+```
+cd backend
+poetry run python pre_start.py
+```
+
+Now you can run the server with live reload:
+```
+poetry run uvicorn main:app --reload
+```
+
 ## App configuration table
 
 Key                          | Default            | Description

@@ -4,7 +4,7 @@ from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import Session, relationship
 
 from app.db.base_class import Base
-from app.core.security import get_password_hash, verify_password
+from app.utils.security import get_password_hash, verify_password
 from app.db.crud import CRUDBase
 from app.schemas.user import UserCreate, UserUpdate
 
