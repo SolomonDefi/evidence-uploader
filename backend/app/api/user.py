@@ -1,19 +1,19 @@
-from typing import Any, List
+from typing import Any
 
 from fastapi import APIRouter, Body, Depends, HTTPException
 from fastapi.encoders import jsonable_encoder
 from pydantic.networks import EmailStr
 from sqlalchemy.orm import Session
 
-from app import models, schemas
+from app import crud, models, schemas
 from app.api import deps
 from app.config import config
-from app.utils import send_new_account_email
+# from app.utils import send_new_account_email
 
 router = APIRouter()
 
 
-@router.get("/", response_model=List[schemas.User])
+@router.get("/", response_model=list[schemas.User])
 def read_users(
     db: Session = Depends(deps.get_db),
     skip: int = 0,
@@ -23,7 +23,7 @@ def read_users(
     """
     Retrieve users.
     """
-    users = models.CRUDUser.get_multi(db, skip=skip, limit=limit)
+    users = crud.user.get_multi(db, skip=skip, limit=limit)
     return users
 
 
@@ -37,17 +37,17 @@ def create_user(
     """
     Create new user.
     """
-    user = models.CRUDUser.get_by_email(db, email=user_in.email)
+    user = crud.user.get_by_email(db, email=user_in.email)
     if user:
         raise HTTPException(
             status_code=400,
             detail="The username is taken.",
         )
-    user = models.CRUDUser.create(db, obj_in=user_in)
-    if config.EMAILS_ENABLED and user_in.email:
-        send_new_account_email(
-            email_to=user_in.email, username=user_in.email, password=user_in.password
-        )
+    user = crud.user.create(db, obj_in=user_in)
+    # if config.EMAILS_ENABLED and user_in.email:
+    #     send_new_account_email(
+    #         email_to=user_in.email, username=user_in.email, password=user_in.password
+    #     )
     return user
 
 
@@ -71,7 +71,7 @@ def update_user_me(
         user_in.full_name = full_name
     if email is not None:
         user_in.email = email
-    user = models.CRUDUser.update(db, db_obj=current_user, obj_in=user_in)
+    user = crud.user.update(db, db_obj=current_user, obj_in=user_in)
     return user
 
 
@@ -102,14 +102,14 @@ def create_user_open(
             status_code=403,
             detail="Open user registration is forbidden on this server",
         )
-    user = models.CRUDUser.get_by_email(db, email=email)
+    user = crud.user.get_by_email(db, email=email)
     if user:
         raise HTTPException(
             status_code=400,
             detail="The user already exists",
         )
     user_in = schemas.UserCreate(password=password, email=email, full_name=full_name)
-    user = models.CRUDUser.create(db, obj_in=user_in)
+    user = crud.user.create(db, obj_in=user_in)
     return user
 
 
@@ -122,10 +122,10 @@ def read_user_by_id(
     """
     Get a specific user by id.
     """
-    user = models.CRUDUser.get(db, id=user_id)
+    user = crud.user.get(db, id=user_id)
     if user == current_user:
         return user
-    if not models.CRUDUser.is_superuser(current_user):
+    if not crud.user.is_superuser(current_user):
         raise HTTPException(
             status_code=403, detail="Missing privileges"
         )
@@ -143,11 +143,11 @@ def update_user(
     """
     Update a user.
     """
-    user = models.CRUDUser.get(db, id=user_id)
+    user = crud.user.get(db, id=user_id)
     if not user:
         raise HTTPException(
             status_code=404,
             detail="The user does not exist",
         )
-    user = models.CRUDUser.update(db, db_obj=user, obj_in=user_in)
+    user = crud.user.update(db, db_obj=user, obj_in=user_in)
     return user

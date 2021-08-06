@@ -6,15 +6,13 @@ from jose import jwt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
-from app import models, schemas
-from app.db import crud
-from . import security
+from app import crud, models, schemas
 from app.config import config
 from app.db.session import SessionLocal
 
-reusable_oauth2 = OAuth2PasswordBearer(
-    tokenUrl=f'/auth/access-token'
-)
+from app.utils import security
+
+reusable_oauth2 = OAuth2PasswordBearer(tokenUrl=f'/auth/access-token')
 
 
 def get_db() -> Generator:
@@ -29,9 +27,7 @@ def get_current_user(
     db: Session = Depends(get_db), token: str = Depends(reusable_oauth2)
 ) -> models.User:
     try:
-        payload = jwt.decode(
-            token, config.SECRET_KEY, algorithms=[security.ALGORITHM]
-        )
+        payload = jwt.decode(token, config.SECRET_KEY, algorithms=[security.ALGORITHM])
         token_data = schemas.TokenPayload(**payload)
     except (jwt.JWTError, ValidationError):
         raise HTTPException(
@@ -56,7 +52,5 @@ def get_current_active_superuser(
     current_user: models.User = Depends(get_current_user),
 ) -> models.User:
     if not crud.user.is_superuser(current_user):
-        raise HTTPException(
-            status_code=400, detail='Missing privileges'
-        )
+        raise HTTPException(status_code=400, detail='Missing privileges')
     return current_user
