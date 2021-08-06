@@ -23,6 +23,16 @@ requests = "^2.26.0"
 pylint = "*"
 pytest = "*"
 black = "^21.6b0"
+mypy = "*"
+sqlalchemy-stubs = "^0.4"
+
+[tool.mypy]
+ignore_missing_imports = true
+follow_imports = "skip"
+show_column_numbers = true
+disallow_untyped_defs = true
+no_warn_no_return = true
+plugins = ["sqlmypy"]
 
 [build-system]
 requires = ["setuptools", "wheel"]

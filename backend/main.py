@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from app.config import config
-from app.router import router
+from app.api import api_router
 
 app = FastAPI(
     title=config.PROJECT_NAME, openapi_url=f'{config.API_PREFIX}/openapi.json'
@@ -18,4 +18,4 @@ if config.CORS_ORIGINS:
         allow_headers=['*'],
     )
 
-app.include_router(router, prefix=config.API_PREFIX)
+app.include_router(api_router, prefix=config.API_PREFIX)

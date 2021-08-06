@@ -60,6 +60,13 @@ Now you can run the server with live reload:
 poetry run uvicorn main:app --reload
 ```
 
+### Test
+
+Run the tests
+```
+poetry run pytest
+```
+
 ## App configuration table
 
 Key                          | Default            | Description

@@ -1,2 +1,2 @@
-from .upload_item import UploadItem, CRUDItem
-from .user import User, CRUDUser
+from .upload_item import UploadItem
+from .user import User

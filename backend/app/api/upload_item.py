@@ -1,15 +1,15 @@
-from typing import Any, List
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app import models, schemas
+from app import crud, models, schemas
 from app.api import deps
 
 router = APIRouter()
 
 
-@router.get("/", response_model=List[schemas.UploadItem])
+@router.get("/", response_model=list[schemas.UploadItem])
 def read_items(
     db: Session = Depends(deps.get_db),
     skip: int = 0,
@@ -19,10 +19,10 @@ def read_items(
     """
     Retrieve items.
     """
-    if models.CRUDUser.is_superuser(current_user):
-        items = models.CRUDItem.get_multi(db, skip=skip, limit=limit)
+    if crud.user.is_superuser(current_user):
+        items = crud.item.get_multi(db, skip=skip, limit=limit)
     else:
-        items = models.CRUDItem.get_multi_by_owner(
+        items = crud.item.get_by_owner(
             db=db, owner_id=current_user.id, skip=skip, limit=limit
         )
     return items
@@ -38,7 +38,9 @@ def create_item(
     """
     Create new item.
     """
-    item = models.CRUDItem.create_with_owner(db=db, obj_in=item_in, owner_id=current_user.id)
+    item = crud.item.create_with_owner(
+        db=db, obj_in=item_in, owner_id=current_user.id
+    )
     return item
 
 
@@ -52,9 +54,11 @@ def read_item(
     """
     Get item by ID.
     """
-    item = models.CRUDItem.get(db=db, id=id)
+    item = crud.item.get(db=db, id=id)
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
-    if not models.CRUDItem.is_superuser(current_user) and (item.owner_id != current_user.id):
+    if not crud.user.is_superuser(current_user) and (
+        item.owner_id != current_user.id
+    ):
         raise HTTPException(status_code=400, detail="Not enough permissions")
     return item
