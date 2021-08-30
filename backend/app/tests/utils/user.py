@@ -1,3 +1,5 @@
+from eth_account import Account
+from eth_account.messages import encode_structured_data
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
@@ -18,12 +20,23 @@ def user_authentication_headers(
     return headers
 
 
-def create_random_user(db: Session) -> models.User:
+def create_random_user(db: Session) -> tuple[models.User, str]:
     email = random_email()
     password = random_lower_string()
     user_in = schemas.UserCreate(username=email, email=email, password=password)
     user = crud.user.create(db=db, obj_in=user_in)
-    return user
+    return user, password
+
+
+def create_random_wallet() -> tuple[str, bytes]:
+    account = Account.create()
+    return account.address, account.key
+
+
+def eth_sign_data(challenge: dict, private_key: bytes) -> str:
+    message = encode_structured_data(challenge)
+    signed_message = Account.sign_message(message, private_key)
+    return signed_message.signature.hex()
 
 
 def authentication_token_from_email(
