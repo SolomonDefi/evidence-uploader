@@ -12,7 +12,7 @@ def create_random_item(
     db: Session, *, owner_id: Optional[int] = None
 ) -> models.UploadItem:
     if owner_id is None:
-        user = create_random_user(db)
+        user, _ = create_random_user(db)
         owner_id = user.id
     title = random_lower_string()
     description = random_lower_string()
