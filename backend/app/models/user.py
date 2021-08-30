@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Boolean, Column, String
+from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
@@ -12,9 +12,12 @@ if TYPE_CHECKING:
 class User(Base):
     __tablename__ = "users"
 
-    full_name = Column(String, index=True)
-    email = Column(String, unique=True, index=True, nullable=False)
-    hashed_password = Column(String, nullable=False)
-    is_active = Column(Boolean(), default=True)
-    is_superuser = Column(Boolean(), default=False)
+    full_name = Column(String)
+    email = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)
+    is_superuser = Column(Boolean, default=False)
+    eth_address = Column(String, unique=True, index=True)
+    challenge_hash = Column(String)
+    challenge_expiry = Column(Integer, default=0)
     items = relationship("UploadItem", back_populates="owner")

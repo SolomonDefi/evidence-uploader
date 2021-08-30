@@ -19,7 +19,7 @@ def get_superuser_token_headers(client: TestClient) -> dict[str, str]:
         "username": config.INITIAL_ADMIN_EMAIL,
         "password": config.INITIAL_ADMIN_PASSWORD,
     }
-    r = client.post(f"{config.API_PREFIX}/login/access-token", data=login_data)
+    r = client.post(f"{config.API_PREFIX}/auth/email", data=login_data)
     tokens = r.json()
     a_token = tokens["access_token"]
     headers = {"Authorization": f"Bearer {a_token}"}
