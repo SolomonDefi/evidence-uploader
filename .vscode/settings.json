@@ -6,7 +6,9 @@
     },
     "files.exclude": {
         "**/node_modules": true,
-        "**/*.postcss.json": true
+        "**/*.postcss.json": true,
+        "**/__pycache__": true,
+        "**/.pytest_cache": true
     },
     "editor.tabSize": 2,
     "[python]": {
