@@ -79,6 +79,12 @@ Generate a migration
 poetry run alembic revision --autogenerate -m "Description"
 ```
 
+### Format
+
+Run black formatter
+```
+poetry run black
+```
 
 ## App configuration table
 

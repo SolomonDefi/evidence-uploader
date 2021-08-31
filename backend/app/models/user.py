@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = 'users'
 
     full_name = Column(String)
     email = Column(String, unique=True, index=True)
@@ -20,4 +20,4 @@ class User(Base):
     eth_address = Column(String, unique=True, index=True)
     challenge_hash = Column(String)
     challenge_expiry = Column(Integer, default=0)
-    items = relationship("UploadItem", back_populates="owner")
+    items = relationship('UploadItem', back_populates='owner')

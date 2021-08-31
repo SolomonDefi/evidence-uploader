@@ -13,7 +13,7 @@ router = APIRouter()
 address_auth = security.AddressHeaderAuth()
 
 
-@router.post("/email", response_model=schemas.Token)
+@router.post('/email', response_model=schemas.Token)
 def email_login(
     db: Session = Depends(deps.get_db), form_data: OAuth2PasswordRequestForm = Depends()
 ) -> schemas.Token:
@@ -23,13 +23,13 @@ def email_login(
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
+            detail='Incorrect username or password',
+            headers={'WWW-Authenticate': 'Bearer'},
         )
     return security.create_access_token(schemas.TokenPayload(sub=str(user.id)))
 
 
-@router.post("/address-challenge", response_model=schemas.AddressChallenge)
+@router.post('/address-challenge', response_model=schemas.AddressChallenge)
 def address_challenge(
     address_in: schemas.AddressChallengeCreate, db: Session = Depends(deps.get_db)
 ) -> schemas.AddressChallenge:
@@ -37,7 +37,7 @@ def address_challenge(
     return schemas.AddressChallenge(challenge=jsonable_encoder(challenge))
 
 
-@router.post("/address", response_model=schemas.Token)
+@router.post('/address', response_model=schemas.Token)
 def address_login(
     db: Session = Depends(deps.get_db),
     address: Optional[str] = Depends(address_auth),
@@ -45,20 +45,20 @@ def address_login(
     if address is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User not found",
-            headers={"WWW-Authenticate": "Bearer"},
+            detail='User not found',
+            headers={'WWW-Authenticate': 'Bearer'},
         )
     user = crud.user.get_by_eth_address(db, eth_address=address)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User not found",
-            headers={"WWW-Authenticate": "Bearer"},
+            detail='User not found',
+            headers={'WWW-Authenticate': 'Bearer'},
         )
     if user.challenge_expiry > datetime.now().timestamp():
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Challenge expired",
-            headers={"WWW-Authenticate": "Bearer"},
+            detail='Challenge expired',
+            headers={'WWW-Authenticate': 'Bearer'},
         )
     return security.create_access_token(schemas.TokenPayload(sub=str(user.id)))

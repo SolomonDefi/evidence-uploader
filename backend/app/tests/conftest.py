@@ -33,35 +33,35 @@ def setup_db() -> None:
         pass
 
     config.SQLALCHEMY_DATABASE_URI = PostgresDsn.build(
-        scheme="postgresql",
+        scheme='postgresql',
         user=config.POSTGRES_USER,
         password=config.POSTGRES_PASSWORD,
         host=config.POSTGRES_SERVER,
-        path=f"/{config.TEST_DB}",
+        path=f'/{config.TEST_DB}',
     )
     test_engine = create_engine(config.SQLALCHEMY_DATABASE_URI)
     Base.metadata.create_all(test_engine)
     SessionLocal.configure(bind=test_engine)
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope='session')
 def db() -> Generator:
     setup_db()
     yield SessionLocal()
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope='module')
 def client() -> Generator:
     with TestClient(app) as c:
         yield c
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope='module')
 def superuser_token_headers(client: TestClient) -> dict[str, str]:
     return get_superuser_token_headers(client)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope='module')
 def normal_user_token_headers(client: TestClient, db: Session) -> dict[str, str]:
     return authentication_token_from_email(
         client=client, email=config.EMAIL_TEST_USER, db=db

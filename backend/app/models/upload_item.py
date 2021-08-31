@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 class UploadItem(Base):
-    __tablename__ = "upload_items"
+    __tablename__ = 'upload_items'
 
-    owner_id = Column(Integer, ForeignKey("users.id"))
-    owner = relationship("User", back_populates="items")
+    owner_id = Column(Integer, ForeignKey('users.id'))
+    owner = relationship('User', back_populates='items')

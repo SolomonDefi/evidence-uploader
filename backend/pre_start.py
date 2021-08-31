@@ -23,7 +23,7 @@ def check_db() -> None:
     try:
         db = SessionLocal()
         # Try to create session to check if DB is awake
-        db.execute("SELECT 1")
+        db.execute('SELECT 1')
     except Exception as e:
         logger.error(e)
         raise e
@@ -32,16 +32,16 @@ def check_db() -> None:
 def create_secret() -> None:
     env = dotenv.dotenv_values('.env')
     if 'SECRET_KEY' not in env:
-        logger.info("Secret key is not found, initializing secret key")
+        logger.info('Secret key is not found, initializing secret key')
         dotenv.set_key('.env', 'SECRET_KEY', secrets.token_urlsafe(32))
 
 
 def main() -> None:
-    logger.info("Initializing service")
+    logger.info('Initializing service')
     check_db()
     create_secret()
-    logger.info("Service finished initializing")
+    logger.info('Service finished initializing')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
