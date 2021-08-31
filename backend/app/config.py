@@ -60,7 +60,7 @@ class Config(BaseSettings):
     SHORTENER_URL: AnyHttpUrl = "http://localhost:5050/"
     SHORTENER_ACCESS_TOKEN: str = "dev"
 
-    TEST_DB: Optional[str] = None
+    TEST_DB: Optional[str] = 'solomon_test'
 
     class Config:
         case_sensitive = True

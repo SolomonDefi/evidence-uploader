@@ -67,6 +67,19 @@ Run the tests
 poetry run pytest
 ```
 
+### Migrations
+
+Apply migrations
+```
+poetry run alembic upgrade head
+```
+
+Generate a migration
+```
+poetry run alembic revision --autogenerate -m "Description"
+```
+
+
 ## App configuration table
 
 Key                          | Default            | Description
