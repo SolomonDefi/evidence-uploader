@@ -1,3 +1,7 @@
+> :warning: This repository has moved :warning:
+
+Solomon is migrating to a monorepo, this repository is no longer used. See https://github.com/solomondefi/solomon-monorepo
+
 # Solomon Evidence Uploader
 
 This repository contains the [frontend](./frontend/) and [backend](./backend/) for the Solomon evidence uploading system.
